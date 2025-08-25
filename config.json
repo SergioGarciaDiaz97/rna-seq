@@ -1,0 +1,73 @@
+{
+  "project_setup": {
+    "base_dir": "RNA_SEQ_Asma_Project",
+    "counting_method": "featureCounts",
+    "sequencing_type": "paired-end",
+    "deseq2_results_dir": "DESEQ2_RESULTS"
+  },
+  "source_data": {
+    "fastq_urls": [
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/008/SRR1039508/SRR1039508_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/008/SRR1039508/SRR1039508_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/001/SRR1039511/SRR1039511_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/001/SRR1039511/SRR1039511_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/005/SRR1039515/SRR1039515_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/005/SRR1039515/SRR1039515_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/009/SRR1039519/SRR1039519_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/009/SRR1039519/SRR1039519_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/003/SRR1039523/SRR1039523_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/003/SRR1039523/SRR1039523_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/SRR1039520/SRR1039520_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/SRR1039520/SRR1039520_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/006/SRR1039516/SRR1039516_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/006/SRR1039516/SRR1039516_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/000/SRR1039510/SRR1039510_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/000/SRR1039510/SRR1039510_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/004/SRR1039514/SRR1039514_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/004/SRR1039514/SRR1039514_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/008/SRR1039518/SRR1039518_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/008/SRR1039518/SRR1039518_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/003/SRR1039513/SRR1039513_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/003/SRR1039513/SRR1039513_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/009/SRR1039509/SRR1039509_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/009/SRR1039509/SRR1039509_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/001/SRR1039521/SRR1039521_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR103/001/SRR1039521/SRR1039521_2.fastq.gz"
+    ],
+    "genome_urls": [
+      "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz",
+      "ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz"
+    ]
+  },
+  "tool_parameters": {
+    "trimmomatic": {
+        "adapter_fasta_url": "https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa"
+    },
+    "star": {
+      "sjdbOverhang": 99
+    },
+    "analysis_thresholds": {
+      "log2fc": 1.0,
+      "padj": 0.05
+    }
+  },
+  "deseq2_experiment": {
+    "metadata_path": "metadata.csv",
+    "design_formula": "~ condition",
+    "control_group": "Control"
+  },
+  "annotation": {
+    "organism_db": "org.Hs.eg.db",
+    "key_type": "ENSEMBL"
+  },
+  "scripts": {
+    "r_script_path": "R_CODES/DESeq2_analysis.R"
+  },
+  "container_images": {
+    "fastqc": "docker://biocontainers/fastqc:v0.12.1_cv1",
+    "trimmomatic": "docker://biocontainers/trimmomatic:v0.39_cv1",
+    "star": "docker://biocontainers/star:v2.7.11a_cv1",
+    "featurecounts": "docker://biocontainers/subread:v2.0.6_cv1",
+    "r_deseq2": "docker://biocontainers/bioconductor-deseq2:v1.42.0_cv1"
+  }
+}
