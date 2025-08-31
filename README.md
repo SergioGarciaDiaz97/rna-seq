@@ -6,8 +6,8 @@ El proyecto ha sido desarrollado por Sergio García Díaz con fines didácticos 
 
 Al ser un código que puede emplearse en otros organismos, se han utilizado también muestras del experimento CARA (Characterizing Arabidopsis Root Attractions); Organismo: Arabidopsis thaliana, ecotipo estándar Columbia-0 (Col-0); Tejido: Puntas de raíz (root tips); Condición: Crecimiento bajo luz ambiental; Variable Principal: Entorno de Vuelo (ISS) vs. Control en Tierra (Ground Control). Para correr este experimento usar arabidopsis.json y configurarlo en el sh para que sea utilizado.
 
-
 IMPORTANTE: Lo primero, crear una carpeta R_CODES y dentro copiar los códigos en R DESeq2_analysis.R y PLOTING_ONTOGENESIS.R, como se verá siguiendo el flujo de trabajo, al final del todo, se genera un txt de los análisis de enriquecimiento, generándose una copia en R_CODES, allí, simplemente como paso final de todo, cargar PLOTING_ONTOGENESIS.R, que lee los txt generados y genera un pdf con del enrriquecimiento (este paso no está aún automatizado, pero funciona usando el código manualmente).
+
 --------------------------------------------------------------------
 ✨ Características Principales
 -Automatización de Extremo a Extremo: Ejecuta el flujo de trabajo completo con un solo comando, desde la descarga de datos hasta el reporte final.
@@ -25,6 +25,7 @@ IMPORTANTE: Lo primero, crear una carpeta R_CODES y dentro copiar los códigos e
 -Soporte para Diseños Complejos: Permite especificar diseños experimentales complejos en DESeq2 (ej. ~ donante + condicion) para controlar variables de confusión.
 
 -Preparado para HPC: Incluye un script de envío run_pipeline.sh listo para ser usado en clústeres con el gestor de trabajos Slurm.
+
 --------------------------------------------------------------------
 workflow Flujo de Trabajo
 El pipeline ejecuta los siguientes pasos de manera secuencial:
@@ -93,6 +94,7 @@ Diseño Modular: Orquestado con Python y análisis estadístico con R (DESeq2).
 Preparado para HPC: Incluye un script de envío para clústeres con Slurm.
 
 Agnóstico al Organismo: El pipeline es versátil y puede ser adaptado para analizar datos de cualquier organismo (ej. Homo sapiens, Arabidopsis thaliana), simplemente modificando el archivo de configuración.
+
 --------------------------------------------------------------------
 ⚠️ Nota Técnica Importante: Parámetro sjdbOverhang
 Para un alineamiento correcto con STAR, el valor de sjdbOverhang debe ser igual a la longitud de tus lecturas menos uno (longitud_lectura - 1).
@@ -100,6 +102,7 @@ Para un alineamiento correcto con STAR, el valor de sjdbOverhang debe ser igual 
 Para verificar la longitud de tus lecturas (después del trimming), usa este comando:
 zcat TU_MUESTRA_1.trimmed.fastq.gz | head -n 2 | tail -n 1 | wc -c ##Es un ejemplo
 Si el resultado es 101, la longitud es 100pb, y el valor de sjdbOverhang debe ser 99.
+
 --------------------------------------------------------------------
 --------------------------------------------------------------------
 
