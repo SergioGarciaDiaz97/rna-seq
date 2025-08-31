@@ -1,0 +1,66 @@
+{
+  "project_setup": {
+    "base_dir": "Arabidopsis_Project_New",
+    "counting_method": "featureCounts",
+    "sequencing_type": "paired-end",
+    "deseq2_results_dir": "DESEQ2_RESULTS"
+  },
+  "source_data": {
+    "fastq_urls": [
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/008/SRR5262948/SRR5262948_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/008/SRR5262948/SRR5262948_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/006/SRR5262956/SRR5262956_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/006/SRR5262956/SRR5262956_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/004/SRR5262964/SRR5262964_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/004/SRR5262964/SRR5262964_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/002/SRR5263092/SRR5263092_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/002/SRR5263092/SRR5263092_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/001/SRR5263101/SRR1039510_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/001/SRR5263101/SRR1039510_2.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/008/SRR5263108/SRR5263108_1.fastq.gz",
+      "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR526/008/SRR5263108/SRR5263108_2.fastq.gz"
+    ],
+    "genome_urls": [
+      "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-57/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz",
+      "https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-57/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.57.gtf.gz"
+    ]
+  },
+  "tool_parameters": {
+    "threads": 8,
+    "trimmomatic": {
+      "adapter_fasta_url": "https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa"
+    },
+    "star": {
+      "sjdbOverhang": 150
+    },
+    "analysis_thresholds": {
+      "log2fc": 1.0,
+      "padj": 0.05
+    }
+  },
+  "deseq2_experiment": {
+    "metadata_path": "metadata_arabidopsis_new.csv",
+    "design_formula": "~ condition",
+    "control_group": "Ground"
+  },
+  "annotation": {
+    "organism_db": "org.At.tair.db",
+    "key_type": "TAIR",
+    "strip_gene_version": false
+  },
+  "scripts": {
+    "r_script_path": "R_CODES/DESeq2_analysis.R"
+  },
+  "container_images": {
+    "fastqc": "/mnt/beegfs/containers/nfcore/fastqc-0.12.1--hdfd78af_0.img",
+    "trimmomatic": "/mnt/beegfs/containers/nfcore/trimmomatic-0.39--hdfd78af_2.img",
+    "star": "/mnt/beegfs/containers/nfcore/quay.io-nf-core-htslib_samtools_star_gawk-311d422a50e6d829.img",
+    "featurecounts": "/mnt/beegfs/containers/nfcore/subread-2.0.6--he4a0461_2.img",
+    "r_deseq2": "/mnt/beegfs/containers/nfcore/biocontainers-bioconductor-tximeta-1.20.1--r43hdfd78af_0.img",
+    "multiqc": "/mnt/beegfs/containers/nfcore/multiqc-1.29--pyhdfd78af_0.img"
+  },
+  "functional_analysis": {
+  "run_kegg": true,
+  "kegg_organism_code": "athaliana"
+}
+}
