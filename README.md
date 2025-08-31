@@ -1,4 +1,5 @@
 Pipeline de Análisis de ARN-Seq Automatizado 🧬
+
 Este repositorio contiene un pipeline completo y automatizado para realizar análisis de expresión diferencial de datos de ARN-Seq, desde los archivos FASTQ crudos hasta los resultados de enriquecimiento funcional y las visualizaciones finales.
 
 El proyecto ha sido desarrollado por Sergio García Díaz con fines didácticos y para demostrar un flujo de trabajo bioinformático reproducible, escalable y agnóstico al organismo. La base de este proyecto se sustenta en los conocimientos y el conjunto de datos del curso "Case Studies in Functional Genomics" (PH525.6x) de HarvardX, utilizando varias muestras del experimento público GSE52778 (usar human.json para dicho experimento). 
